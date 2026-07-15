@@ -6,16 +6,20 @@
 import { getState, setState, markTourDone } from "./state.js";
 import { t } from "./i18n.js";
 
-/* Narrative order: data in → what it does (production, then capex) → scenario planning.
-   1 step per output; scenario planning is the finale (the important beat). */
+/* Narrative order: intro (what is demand forecasting) → data in → what it does
+   (production, then capex) → scenario planning. 1 step per output; scenario planning
+   is the finale. Beat 0 is a centered intro card with no spotlight (target: null).
+   `key` drives the i18n copy; `n` is just the display number. */
 const BEATS = [
-  { n: 1, target: "next-data", tag: "data in — one place",
+  { n: 1, key: "tb0", target: null, tag: "intro — demand forecasting",
     apply: function () { setState({ screen: "next" }); } },
-  { n: 2, target: "mix-signal", tag: "production planning",
+  { n: 2, key: "tb1", target: "next-data", tag: "data in — one place",
+    apply: function () { setState({ screen: "next" }); } },
+  { n: 3, key: "tb2", target: "mix-signal", tag: "production planning",
     apply: function () { setState({ screen: "mix", filters: { region: "occidente", product: "rebar", horizon: 9 } }); } },
-  { n: 3, target: "capex-rec", tag: "capex planning — BUILD",
+  { n: 4, key: "tb3", target: "capex-rec", tag: "capex planning — BUILD",
     apply: function () { setState({ screen: "capex", capex: { event: "compExit" } }); } },
-  { n: 4, target: "capex-scenarios", tag: "scenario planning — graph moves",
+  { n: 5, key: "tb4", target: "capex-scenarios", tag: "scenario planning — graph moves",
     apply: function () { setState({ screen: "capex", capex: { event: "compEnter" } }); } }
 ];
 
@@ -46,7 +50,7 @@ function showBeat() {
   updateTooltip(beat);
   // let layout + scroll settle, then spotlight
   setTimeout(function () {
-    const el = document.querySelector('[data-tour="' + beat.target + '"]');
+    const el = beat.target && document.querySelector('[data-tour="' + beat.target + '"]');
     if (el) el.scrollIntoView({ block: "center", behavior: "smooth" });
     setTimeout(reposition, 220);
   }, 40);
@@ -55,8 +59,16 @@ function showBeat() {
 function reposition() {
   if (idx < 0 || !nodes) return;
   const beat = BEATS[idx];
-  const el = document.querySelector('[data-tour="' + beat.target + '"]');
-  if (!el) return;
+  const el = beat.target ? document.querySelector('[data-tour="' + beat.target + '"]') : null;
+  // Intro / no-target beat: hide the spotlight and center the card.
+  if (!el) {
+    nodes.highlight.style.display = "none";
+    const t0 = nodes.tip;
+    t0.style.left = Math.max(16, (window.innerWidth - t0.offsetWidth) / 2) + "px";
+    t0.style.top = Math.max(16, (window.innerHeight - t0.offsetHeight) / 2) + "px";
+    return;
+  }
+  nodes.highlight.style.display = "";
   const r = el.getBoundingClientRect();
   const pad = 8;
   const hl = nodes.highlight;
@@ -76,8 +88,8 @@ function reposition() {
 function updateTooltip(beat) {
   if (!nodes) return;
   nodes.beatNum.textContent = "STEP " + beat.n + " / " + BEATS.length;
-  nodes.title.textContent = t("tb" + beat.n + "_title");
-  nodes.body.textContent = t("tb" + beat.n + "_body");
+  nodes.title.textContent = t(beat.key + "_title");
+  nodes.body.textContent = t(beat.key + "_body");
   nodes.dots.innerHTML = BEATS.map(function (b, i) {
     return '<span class="tour-dot' + (i === idx ? " is-on" : "") + '"></span>';
   }).join("");

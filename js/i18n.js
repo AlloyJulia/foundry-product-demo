@@ -285,6 +285,8 @@ export const I18N = {
     scen_prob: "prob.",
 
     /* Spotlight tour — 7 beats (title / body / what this proves) */
+    tb0_title: "First — what we're even talking about",
+    tb0_body: "Every producer has to decide how much to make — months, sometimes years, before the orders actually land. That bet is the demand forecast. Get it right and you run lean and full; get it wrong and you either overbuild or stock out. Foundry exists to make that call sharper. Here's how, in four quick steps.",
     tb1_title: "New signals you never had — fed in automatically",
     tb1_body: "The unlock is data you couldn't get before — like a competitor bringing new capacity online — pulled in automatically, next to global-market and trade signals and your own internal numbers (weekly sales, production history). One live feed, nothing to chase by hand — and every recommendation runs off it.",
     tb1_proves: "Proves the product has a coherent shape, not one screen — and the two calls never contradict.",
@@ -588,6 +590,8 @@ export const I18N = {
     scen_prob: "prob.",
 
     /* Spotlight tour — 7 beats */
+    tb0_title: "Primero — de qué estamos hablando",
+    tb0_body: "Todo productor tiene que decidir cuánto fabricar — meses, a veces años, antes de que lleguen los pedidos. Esa apuesta es el pronóstico de demanda. Si aciertas, operas ajustado y completo; si te equivocas, sobreproduces o te quedas sin inventario. Foundry existe para afinar esa decisión. Así, en cuatro pasos rápidos.",
     tb1_title: "Señales nuevas que nunca tuviste — integradas automáticamente",
     tb1_body: "El gran desbloqueo son los datos que antes no podías obtener — como un competidor que pone nueva capacidad en marcha — integrados automáticamente, junto a señales de mercado global y comercio y tus propios números internos (ventas semanales, historial de producción). Un solo feed en vivo, sin perseguir nada a mano — y cada recomendación corre a partir de él.",
     tb1_proves: "Demuestra que el producto tiene forma coherente, no una sola pantalla — y las dos decisiones nunca se contradicen.",
