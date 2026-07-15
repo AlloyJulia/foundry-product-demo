@@ -176,11 +176,13 @@ export const HOME_ACTIVITY = [
 /* ---- Screen 5 (Data & Model): data sources + model card (sample data) ---- */
 // status: connected | sample | syncing. Labels resolved via i18n (dm_status_*).
 export const DATA_SOURCES = [
-  { en: "World Steel Association", es: "World Steel Association", type_en: "Demand forecast", type_es: "Pronóstico de demanda", status: "sample", sync: "Jul 12" },
-  { en: "OECD Steel Committee", es: "Comité del Acero OCDE", type_en: "Global capacity", type_es: "Capacidad global", status: "sample", sync: "Jul 10" },
+  { en: "Competitor capacity tracker", es: "Rastreador de capacidad de competidores", type_en: "NEW · competitor capacity additions", type_es: "NUEVO · ampliaciones de capacidad de competidores", status: "sample", sync: "Jul 13" },
+  { en: "OECD Steel Committee", es: "Comité del Acero OCDE", type_en: "NEW · global capacity vs. demand", type_es: "NUEVO · capacidad global vs. demanda", status: "sample", sync: "Jul 10" },
+  { en: "National customs", es: "Aduanas nacionales", type_en: "NEW · import / dumping flows", type_es: "NUEVO · flujos de importación / dumping", status: "sample", sync: "Jul 11" },
+  { en: "World Steel Association", es: "World Steel Association", type_en: "Demand outlook", type_es: "Panorama de demanda", status: "sample", sync: "Jul 12" },
   { en: "National central bank", es: "Banco central nacional", type_en: "Macro & construction indicators", type_es: "Indicadores macro y de construcción", status: "sample", sync: "Jul 13" },
-  { en: "National customs", es: "Aduanas nacionales", type_en: "Import / customs flows", type_es: "Flujos de importación / aduanas", status: "sample", sync: "Jul 11" },
-  { en: "Mill ERP", es: "ERP de la planta", type_en: "Production & demand history", type_es: "Historial de producción y demanda", status: "syncing", sync: "—" }
+  { en: "Weekly sales & orders", es: "Ventas y pedidos semanales", type_en: "Internal · your own weekly numbers", type_es: "Interno · tus propios números semanales", status: "syncing", sync: "auto" },
+  { en: "Mill ERP", es: "ERP de la planta", type_en: "Internal · production & demand history", type_es: "Interno · producción e historial de demanda", status: "syncing", sync: "auto" }
 ];
 
 /* ---- Screen 4: EVENT-DRIVEN scenario planning (ILLUSTRATIVE, client-side only) ---- */

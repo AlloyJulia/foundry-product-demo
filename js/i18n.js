@@ -284,8 +284,8 @@ export const I18N = {
     scen_prob: "prob.",
 
     /* Spotlight tour — 7 beats (title / body / what this proves) */
-    tb1_title: "It starts with your signals — in one place",
-    tb1_body: "The sources your team used to chase by hand, external signals you never had access to, and your own internal data — pulled into one feed. Everything downstream runs off this.",
+    tb1_title: "New signals you never had — fed in automatically",
+    tb1_body: "The unlock is data you couldn't get before — like a competitor bringing new capacity online — pulled in automatically, next to global-market and trade signals and your own internal numbers (weekly sales, production history). One live feed, nothing to chase by hand — and every recommendation runs off it.",
     tb1_proves: "Proves the product has a coherent shape, not one screen — and the two calls never contradict.",
     tb2_title: "What it does, part 1 — plan production",
     tb2_body: "Your monthly forward demand by product and region, with the recommended mill mix vs. your standing plan — so you shift the mix ahead of a swing instead of reacting after it.",
@@ -586,8 +586,8 @@ export const I18N = {
     scen_prob: "prob.",
 
     /* Spotlight tour — 7 beats */
-    tb1_title: "Empieza con tus señales — en un solo lugar",
-    tb1_body: "Las fuentes que tu equipo perseguía a mano, señales externas a las que nunca tuviste acceso, y tus propios datos internos — reunidos en un solo feed. Todo lo demás corre a partir de esto.",
+    tb1_title: "Señales nuevas que nunca tuviste — integradas automáticamente",
+    tb1_body: "El gran desbloqueo son los datos que antes no podías obtener — como un competidor que pone nueva capacidad en marcha — integrados automáticamente, junto a señales de mercado global y comercio y tus propios números internos (ventas semanales, historial de producción). Un solo feed en vivo, sin perseguir nada a mano — y cada recomendación corre a partir de él.",
     tb1_proves: "Demuestra que el producto tiene forma coherente, no una sola pantalla — y las dos decisiones nunca se contradicen.",
     tb2_title: "Qué hace, parte 1 — planear producción",
     tb2_body: "Tu demanda proyectada mensual por producto y región, con la mezcla recomendada del tren vs. tu plan vigente — para ajustar la mezcla antes de un cambio, en vez de reaccionar después.",
