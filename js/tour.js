@@ -1,7 +1,7 @@
 /* Foundry product-v2 — spotlight coachmark tour.
-   7 beats, each: navigates + performs a live UI action (so the value prop is shown,
-   not just told), spotlights a data-tour target, and states what it proves + the
-   source artifact. Auto-starts first visit; restartable; Esc/Skip exits cleanly. */
+   4 beats in narrative order (data in → production → capex/BUILD → scenario planning):
+   each navigates + performs a live UI action (so the value prop is shown, not told),
+   spotlights a data-tour target. Auto-starts first visit; restartable; Esc/Skip exits. */
 
 import { getState, setState, markTourDone } from "./state.js";
 import { t } from "./i18n.js";
@@ -13,10 +13,10 @@ const BEATS = [
     apply: function () { setState({ screen: "next" }); } },
   { n: 2, target: "mix-signal", tag: "production planning",
     apply: function () { setState({ screen: "mix", filters: { region: "occidente", product: "rebar", horizon: 9 } }); } },
-  { n: 3, target: "capex-rec", tag: "capex planning",
-    apply: function () { setState({ screen: "capex", capex: { event: "baseline" } }); } },
-  { n: 4, target: "capex-whatif", tag: "scenario planning",
-    apply: function () { setState({ screen: "capex", capex: { event: "compExit" } }); } }
+  { n: 3, target: "capex-rec", tag: "capex planning — BUILD",
+    apply: function () { setState({ screen: "capex", capex: { event: "compExit" } }); } },
+  { n: 4, target: "capex-scenarios", tag: "scenario planning — graph moves",
+    apply: function () { setState({ screen: "capex", capex: { event: "compEnter" } }); } }
 ];
 
 let idx = -1;

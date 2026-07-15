@@ -1,8 +1,7 @@
 /* Screen 4 — Capex Build / Wait / Partner. What-if engine drives the recommendation,
-   scenario fan, break-even, and committee closing beat. */
+   scenario fan, and break-even. (Shared-model contributors moved to the data screen.) */
 import { t } from "../i18n.js";
 import { getState } from "../state.js";
-import { COMMITTEE } from "../data.js";
 import { recFor, scenariosFor, breakevenFor } from "../compute.js";
 import { scenarioFan, scenarioLegend, probBars, breakevenBars } from "../charts.js";
 
@@ -19,16 +18,6 @@ export function renderCapex() {
 
   const chips = EVENT_KEYS.map(function (k) {
     return '<button class="whatif-chip' + (k === event ? " active" : "") + '" data-event="' + k + '" data-i18n="ev_' + k + '">' + t("ev_" + k) + '</button>';
-  }).join("");
-
-  const committee = COMMITTEE.map(function (r) {
-    const name = st.lang === "es" ? r.es : r.en;
-    const initials = name.split(/[\s/]+/).filter(Boolean).slice(0, 2).map(function (w) { return w.charAt(0); }).join("").toUpperCase();
-    return '<div class="crole crole--' + r.status + '">' +
-      '<span class="crole__avatar">' + initials + '</span>' +
-      '<span class="crole__info"><span class="crole__name">' + name + '</span>' +
-      '<span class="crole__status"><span class="crole__dot"></span>' + t("comm_st_" + r.status) + '</span></span>' +
-      '</div>';
   }).join("");
 
   const whatifReadout = event !== "baseline"
@@ -67,7 +56,7 @@ export function renderCapex() {
       '</div>' +
 
       '<div class="capex-grid">' +
-        '<div class="capex-panel">' +
+        '<div class="capex-panel" data-tour="capex-scenarios">' +
           '<div class="capex-panel__title" data-i18n="s4_scen_title">' + t("s4_scen_title") + '</div>' +
           '<div id="scenario-mount">' + scenarioFan(scen, st.lang) + '</div>' +
           '<div class="chart-legend">' + scenarioLegend() + '</div>' +
@@ -125,18 +114,9 @@ export function renderCapex() {
         '</div>' +
       '</div>' +
 
-      '<div class="committee committee--closing">' +
-        '<div class="committee__head">' +
-          '<div class="eyebrow" data-i18n="s4_comm_eyebrow">' + t("s4_comm_eyebrow") + '</div>' +
-          '<div class="committee__title" data-i18n="s4_comm_title">' + t("s4_comm_title") + '</div>' +
-          '<div class="committee__sub" data-i18n="s4_comm_sub">' + t("s4_comm_sub") + '</div>' +
-        '</div>' +
-        '<div class="committee-roles">' + committee + '</div>' +
-      '</div>' +
-
       '<div class="screen-nav">' +
-        '<button class="btn-ghost" data-goto="drivers">← <span data-i18n="back">' + t("back") + '</span></button>' +
-        '<button class="btn-primary" data-goto="next"><span data-i18n="s4_cta">' + t("s4_cta") + '</span> →</button>' +
+        '<button class="btn-ghost" data-goto="mix">← <span data-i18n="back">' + t("back") + '</span></button>' +
+        '<button class="btn-primary" data-goto="drivers"><span data-i18n="s4_cta">' + t("s4_cta") + '</span> →</button>' +
       '</div>' +
     '</div>';
 }

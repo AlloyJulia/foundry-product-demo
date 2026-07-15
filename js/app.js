@@ -152,7 +152,7 @@ function closeAllPops() {
 
 function onKey(e) {
   if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
-  const order = ["overview", "mix", "drivers", "capex", "next"];
+  const order = ["next", "mix", "capex", "drivers", "overview"];
   const i = order.indexOf(getState().screen);
   if (e.key === "ArrowRight" && i < order.length - 1) setState({ screen: order[i + 1] });
   else if (e.key === "ArrowLeft" && i > 0) setState({ screen: order[i - 1] });

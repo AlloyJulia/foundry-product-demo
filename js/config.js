@@ -13,7 +13,7 @@ export const SESSION = {
   lastLogin: "2 min ago"
 };
 
-export const SCREENS = ["overview", "mix", "drivers", "capex", "next"];
+export const SCREENS = ["next", "mix", "capex", "drivers", "overview"];
 
 // Filter option keys (labels resolved via i18n).
 export const REGIONS = ["occidente", "oriente", "central"];

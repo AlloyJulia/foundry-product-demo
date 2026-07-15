@@ -75,8 +75,8 @@ export function renderDrivers() {
       '</div>' +
 
       '<div class="screen-nav">' +
-        '<button class="btn-ghost" data-goto="mix">← <span data-i18n="back">' + t("back") + '</span></button>' +
-        '<button class="btn-primary" data-goto="capex"><span data-i18n="s3_cta">' + t("s3_cta") + '</span> →</button>' +
+        '<button class="btn-ghost" data-goto="capex">← <span data-i18n="back">' + t("back") + '</span></button>' +
+        '<button class="btn-primary" data-goto="overview"><span data-i18n="s3_cta">' + t("s3_cta") + '</span> →</button>' +
       '</div>' +
     '</div>';
 }

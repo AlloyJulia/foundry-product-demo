@@ -3,7 +3,7 @@
    (where the "sample data" disclosure lives, without a pitch). */
 import { t } from "../i18n.js";
 import { getState } from "../state.js";
-import { DATA_SOURCES } from "../data.js";
+import { DATA_SOURCES, COMMITTEE } from "../data.js";
 
 export function renderNext() {
   const el = document.getElementById("screen-next");
@@ -19,6 +19,16 @@ export function renderNext() {
       '<td><span class="dm-status dm-status--' + s.status + '">' + t("dm_status_" + s.status) + '</span></td>' +
       '<td class="dm-sync">' + s.sync + '</td>' +
     '</tr>';
+  }).join("");
+
+  const committee = COMMITTEE.map(function (r) {
+    const name = lang === "es" ? r.es : r.en;
+    const initials = name.split(/[\s/]+/).filter(Boolean).slice(0, 2).map(function (w) { return w.charAt(0); }).join("").toUpperCase();
+    return '<div class="crole crole--' + r.status + '">' +
+      '<span class="crole__avatar">' + initials + '</span>' +
+      '<span class="crole__info"><span class="crole__name">' + name + '</span>' +
+      '<span class="crole__status"><span class="crole__dot"></span>' + t("comm_st_" + r.status) + '</span></span>' +
+      '</div>';
   }).join("");
 
   el.innerHTML =
@@ -38,6 +48,13 @@ export function renderNext() {
           '</tr></thead>' +
           '<tbody>' + rows + '</tbody>' +
         '</table></div>' +
+      '</section>' +
+
+      '<section class="dm-card">' +
+        '<div class="eyebrow" data-i18n="s4_comm_eyebrow">' + t("s4_comm_eyebrow") + '</div>' +
+        '<div class="dm-card__title" data-i18n="s4_comm_title">' + t("s4_comm_title") + '</div>' +
+        '<p class="dm-p" data-i18n="s4_comm_sub">' + t("s4_comm_sub") + '</p>' +
+        '<div class="committee-roles">' + committee + '</div>' +
       '</section>' +
 
       '<div class="dm-grid">' +
@@ -63,8 +80,8 @@ export function renderNext() {
       '</div>' +
 
       '<div class="screen-nav">' +
-        '<button class="btn-ghost" data-goto="capex">← <span data-i18n="back">' + t("back") + '</span></button>' +
         '<button class="btn-ghost" data-goto="overview"><span data-i18n="nav1">' + t("nav1") + '</span></button>' +
+        '<button class="btn-primary" data-goto="mix"><span data-i18n="dm_cta">' + t("dm_cta") + '</span> →</button>' +
       '</div>' +
     '</div>';
 }

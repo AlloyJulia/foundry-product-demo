@@ -69,6 +69,7 @@ export const I18N = {
     dm_refresh_text: "Signals refresh monthly on the operating cycle; capex scenarios re-run on demand.",
     dm_env_title: "Environment",
     dm_env_text: "This is a <b>demo environment running on representative sample data</b> — not a real forecast, a real backtest, or an analysis of any live data. Connecting your mill's ERP and licensed external feeds is what makes it operational.",
+    dm_cta: "See production planning",
 
     /* ---- filters (new) ---- */
     flt_region: "Region",
@@ -144,7 +145,7 @@ export const I18N = {
     s2_cold_text: "<b>South merchant bar:</b> under 6 months of clean history — not enough data to forecast yet. Foundry holds to your standing plan and flags why, instead of guessing.",
     comm_st_submitted: "Input submitted", comm_st_editing: "Entering input…",
     comm_st_reviewing: "Reviewing", comm_st_notified: "Notified",
-    s2_cta: "What's driving this signal",
+    s2_cta: "Now the big capex call",
 
     /* Screen 3 */
     s3_eyebrow: "WHAT'S DRIVING THIS · SIGNAL SPINE",
@@ -176,7 +177,7 @@ export const I18N = {
     s3_lead_off_note: "With the leading indicator off, Foundry falls back to lagging proxies like the order backlog — the confidence band widens and the surge is confirmed ~8–10 weeks later. That lead time is the edge.",
     s3_conflict_label: "WHEN SIGNALS CONFLICT",
     s3_conflict_text: "If a leading indicator and the conventional proxies point in opposite directions, Foundry lowers its confidence and says so — it does not force a recommendation it can't stand behind.",
-    s3_cta: "Now the high-stakes decision",
+    s3_cta: "See your dashboard",
 
     /* Screen 4 */
     s4_eyebrow: "CAPEX DECISION SUPPORT",
@@ -214,10 +215,10 @@ export const I18N = {
     s4_cost1_label: "Idle-capacity carrying cost until demand fills the line.",
     s4_cost2_tag: "BUILD TOO LATE", s4_cost2_value: "Lost margin",
     s4_cost2_label: "Demand you can't serve walks to competitors — the 2025 stockout pattern, at capacity scale.",
-    s4_cta: "Data & model",
+    s4_cta: "See the signal drivers",
 
     s4_comm_eyebrow: "SHARED MODEL",
-    s4_comm_title: "Contributors to this decision",
+    s4_comm_title: "Everyone feeds one shared model",
     s4_comm_sub: "Each planning role feeds its own input into the same live model and is notified when it changes. Current status by role:",
     s4_comm_old_tag: "TODAY · SEQUENTIAL EXCEL",
     s4_comm_old_text: "One person does their part, then everyone else waits for it to be validated and approved before the next can start. A single file, passed desk to desk.",
@@ -287,14 +288,14 @@ export const I18N = {
     tb1_title: "New signals you never had — fed in automatically",
     tb1_body: "The unlock is data you couldn't get before — like a competitor bringing new capacity online — pulled in automatically, next to global-market and trade signals and your own internal numbers (weekly sales, production history). One live feed, nothing to chase by hand — and every recommendation runs off it.",
     tb1_proves: "Proves the product has a coherent shape, not one screen — and the two calls never contradict.",
-    tb2_title: "What it does, part 1 — plan production",
-    tb2_body: "Your monthly forward demand by product and region, with the recommended mill mix vs. your standing plan — so you shift the mix ahead of a swing instead of reacting after it.",
+    tb2_title: "See the swing before it costs you",
+    tb2_body: "This is rebar in your North region — its forward demand and the mix to run vs. your plan. Foundry flags when you're about to over- or under-produce, so you move ahead of the swing and stop losing margin to stockouts. Pick any product or region up top and it recomputes for each.",
     tb2_proves: "Proves it's a live operating tool, company-specific and forward-looking — not a static report.",
-    tb3_title: "What it does, part 2 — time the big bet",
-    tb3_body: "For a major capacity decision, a clear build / wait / partner recommendation with a timing window — the rare, high-stakes call, made on the same signal.",
+    tb3_title: "Time your next line — and what you'd gain",
+    tb3_body: "For a major capacity call — a second rolling line — Foundry weighs the scenarios and makes the call. Here it's BUILD: demand supports the line, it clears break-even in the base case, and committing now captures the surge before a 30-month build locks you out.",
     tb3_proves: "Proves the core job: catch a surge early, the way the 2025 miss (7%→17%) was not caught.",
-    tb4_title: "The heart of it — scenario planning",
-    tb4_body: "The forecast will be wrong; the only question is how. Change what happens — a competitor adds a line, a policy shifts, costs spike — and watch the recommendation move. You leave with a plan for each way the market could break.",
+    tb4_title: "The heart of it — plan for every scenario",
+    tb4_body: "The forecast will be wrong; the only question is how. Flip the scenario — say a competitor enters instead — and the demand fan, the break-even and the recommendation all move, not just the words. You leave with a plan for each way the market could break.",
     tb4_proves: "Proves the product tells you when NOT to trust it — no forced recommendation.",
     tb5_title: "Leading indicators",
     tb5_body: "See which signals drive the forecast. Toggle a leading indicator off to see how much of the early warning depends on it — the band widens without it.",
@@ -371,6 +372,7 @@ export const I18N = {
     dm_refresh_text: "Las señales se actualizan mensualmente en el ciclo operativo; los escenarios de capex se recalculan bajo demanda.",
     dm_env_title: "Entorno",
     dm_env_text: "Este es un <b>entorno de demostración con datos de muestra representativos</b> — no es un pronóstico real, un backtest real ni un análisis de datos reales. Conectar el ERP de tu planta y los feeds externos licenciados es lo que lo vuelve operativo.",
+    dm_cta: "Ver planeación de producción",
 
     /* ---- filters (new) ---- */
     flt_region: "Región",
@@ -446,7 +448,7 @@ export const I18N = {
     s2_cold_text: "<b>Barra comercial de Sur:</b> menos de 6 meses de historial limpio — aún no hay datos suficientes para pronosticar. Foundry se mantiene en tu plan vigente y explica por qué, en vez de adivinar.",
     comm_st_submitted: "Insumo enviado", comm_st_editing: "Ingresando insumo…",
     comm_st_reviewing: "Revisando", comm_st_notified: "Notificado",
-    s2_cta: "Qué está impulsando esta señal",
+    s2_cta: "Ahora la gran decisión de capex",
 
     /* Screen 3 */
     s3_eyebrow: "QUÉ ESTÁ IMPULSANDO ESTO · COLUMNA DE SEÑALES",
@@ -478,7 +480,7 @@ export const I18N = {
     s3_lead_off_note: "Con el indicador líder desactivado, Foundry recurre a proxies rezagados como la cartera de pedidos — la banda de confianza se ensancha y el repunte se confirma ~8–10 semanas más tarde. Ese tiempo de anticipación es la ventaja.",
     s3_conflict_label: "CUANDO LAS SEÑALES SE CONTRADICEN",
     s3_conflict_text: "Si un indicador líder y los proxies convencionales apuntan en direcciones opuestas, Foundry baja su confianza y lo dice — no fuerza una recomendación que no puede respaldar.",
-    s3_cta: "Ahora la decisión de alto riesgo",
+    s3_cta: "Ver tu tablero",
 
     /* Screen 4 */
     s4_eyebrow: "SOPORTE A LA DECISIÓN DE CAPEX",
@@ -516,10 +518,10 @@ export const I18N = {
     s4_cost1_label: "Costo de mantener capacidad ociosa hasta que la demanda llene la línea.",
     s4_cost2_tag: "CONSTRUIR DEMASIADO TARDE", s4_cost2_value: "Margen perdido",
     s4_cost2_label: "La demanda que no puedes atender se va a la competencia — el patrón de desabastecimiento de 2025, a escala de capacidad.",
-    s4_cta: "Datos y modelo",
+    s4_cta: "Ver las señales",
 
     s4_comm_eyebrow: "MODELO COMPARTIDO",
-    s4_comm_title: "Colaboradores de esta decisión",
+    s4_comm_title: "Todos alimentan un modelo compartido",
     s4_comm_sub: "Cada rol de planeación aporta su propio insumo al mismo modelo en vivo y es notificado cuando cambia. Estado actual por rol:",
     s4_comm_old_tag: "HOY · EXCEL SECUENCIAL",
     s4_comm_old_text: "Una persona hace su parte, y luego los demás esperan a que se valide y apruebe antes de que la siguiente pueda empezar. Un solo archivo, pasado de escritorio en escritorio.",
@@ -589,14 +591,14 @@ export const I18N = {
     tb1_title: "Señales nuevas que nunca tuviste — integradas automáticamente",
     tb1_body: "El gran desbloqueo son los datos que antes no podías obtener — como un competidor que pone nueva capacidad en marcha — integrados automáticamente, junto a señales de mercado global y comercio y tus propios números internos (ventas semanales, historial de producción). Un solo feed en vivo, sin perseguir nada a mano — y cada recomendación corre a partir de él.",
     tb1_proves: "Demuestra que el producto tiene forma coherente, no una sola pantalla — y las dos decisiones nunca se contradicen.",
-    tb2_title: "Qué hace, parte 1 — planear producción",
-    tb2_body: "Tu demanda proyectada mensual por producto y región, con la mezcla recomendada del tren vs. tu plan vigente — para ajustar la mezcla antes de un cambio, en vez de reaccionar después.",
+    tb2_title: "Ve el cambio antes de que te cueste",
+    tb2_body: "Esto es varilla en tu región Norte — su demanda proyectada y la mezcla a correr vs. tu plan. Foundry avisa cuando estás por producir de más o de menos, para que te muevas antes del cambio y dejes de perder margen por desabastecimientos. Elige cualquier producto o región arriba y se recalcula para cada uno.",
     tb2_proves: "Demuestra que es una herramienta operativa en vivo, específica de la empresa y prospectiva — no un reporte estático.",
-    tb3_title: "Qué hace, parte 2 — acertar el momento de la gran apuesta",
-    tb3_body: "Para una decisión de capacidad importante, una recomendación clara de construir / esperar / asociarse con una ventana de tiempo — la decisión rara y de alto riesgo, sobre la misma señal.",
+    tb3_title: "Cronometra tu próxima línea — y lo que ganarías",
+    tb3_body: "Para una decisión de capacidad importante — un segundo tren de laminación — Foundry pondera los escenarios y da la recomendación. Aquí es CONSTRUIR: la demanda respalda la línea, supera el punto de equilibrio en el caso base, y comprometerse ahora captura el repunte antes de que una obra de 30 meses te deje fuera.",
     tb3_proves: "Demuestra el trabajo central: atrapar un repunte temprano, como NO se atrapó la desviación de 2025 (7%→17%).",
-    tb4_title: "El corazón — planificación de escenarios",
-    tb4_body: "El pronóstico se equivocará; la única pregunta es cómo. Cambia lo que pasa — un competidor suma una línea, cambia una política, se disparan los costos — y observa cómo se mueve la recomendación. Sales con un plan para cada camino que el mercado pueda tomar.",
+    tb4_title: "El corazón — un plan para cada escenario",
+    tb4_body: "El pronóstico se equivocará; la única pregunta es cómo. Cambia el escenario — por ejemplo, entra un competidor — y el abanico de demanda, el punto de equilibrio y la recomendación se mueven, no solo las palabras. Sales con un plan para cada camino que el mercado pueda tomar.",
     tb4_proves: "Demuestra que el producto te dice cuándo NO confiar en él — sin recomendación forzada.",
     tb5_title: "Indicadores líderes",
     tb5_body: "Mira qué señales impulsan el pronóstico. Desactiva un indicador líder para ver cuánta de la anticipación depende de él — la banda se ensancha sin él.",

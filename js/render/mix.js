@@ -38,8 +38,8 @@ export function renderMix() {
             : signalBlock(fc, div))) +
 
       '<div class="screen-nav">' +
-        '<button class="btn-ghost" data-goto="overview">← <span data-i18n="back">' + t("back") + '</span></button>' +
-        '<button class="btn-primary" data-goto="drivers"><span data-i18n="s2_cta">' + t("s2_cta") + '</span> →</button>' +
+        '<button class="btn-ghost" data-goto="next">← <span data-i18n="back">' + t("back") + '</span></button>' +
+        '<button class="btn-primary" data-goto="capex"><span data-i18n="s2_cta">' + t("s2_cta") + '</span> →</button>' +
       '</div>' +
     '</div>';
 }
