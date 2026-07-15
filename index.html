@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Foundry — Decision Intelligence for Process Industries</title>
+<link rel="stylesheet" href="design-system/tokens.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============ APP BAR ============ -->
+<header class="appbar">
+  <div class="appbar__left">
+    <span class="brand-mark" data-brand>Foundry</span>
+    <span class="brand-tag" data-i18n="appbar_tag">Product workspace</span>
+    <div class="ws-switch pop-anchor">
+      <button class="ws-switch__btn" id="ws-btn">
+        <span class="ws-dot"></span><span data-i18n="ws_switch">Steelco</span> <span class="caret">▾</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="appbar__center">
+    <input id="search" class="appbar__search" type="text" data-i18n-ph="search_ph" placeholder="Search screens & actions…" aria-label="Search">
+  </div>
+
+  <div class="appbar__right">
+    <button class="sample-pill pop-anchor" id="sample-pill" aria-haspopup="true">
+      <span class="sample-pill__glyph">◈</span><span data-i18n="sample_pill">Sample data</span>
+    </button>
+    <div class="pop pop--right" id="sample-pop" role="tooltip">
+      <p data-i18n="sample_pop">Every figure in this workspace is representative sample data.</p>
+    </div>
+
+    <button class="icon-btn" id="notif-bell" aria-label="Notifications">
+      <span class="bell">◔</span><span class="notif-badge" id="notif-badge">0</span>
+    </button>
+    <div class="pop pop--right" id="notif-pop" role="dialog">
+      <div class="pop__title" data-i18n="notif_title">Notifications</div>
+      <ul class="notif-list" id="notif-list"></ul>
+    </div>
+
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="es">ES</button>
+    </div>
+
+    <div class="user-chip">
+      <span class="user-chip__avatar" id="user-initials">JR</span>
+      <span class="user-chip__meta">
+        <span class="user-chip__name" id="user-name">Julia R.</span>
+        <span class="user-chip__role" data-i18n="user_role">Planning</span>
+      </span>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <!-- ============ LEFT RAIL ============ -->
+  <nav class="railnav" aria-label="Screens">
+    <button class="railnav__item is-active" data-screen="overview"><span class="railnav__ico">▦</span><span class="railnav__label" data-i18n="nav1">Overview</span></button>
+    <button class="railnav__item" data-screen="mix"><span class="railnav__ico">◧</span><span class="railnav__label" data-i18n="nav2">Production Mix</span></button>
+    <button class="railnav__item" data-screen="drivers"><span class="railnav__ico">◈</span><span class="railnav__label" data-i18n="nav3">Signal Drivers</span></button>
+    <button class="railnav__item" data-screen="capex"><span class="railnav__ico">◆</span><span class="railnav__label" data-i18n="nav4">Capex Decision</span></button>
+    <button class="railnav__item" data-screen="next"><span class="railnav__ico">✦</span><span class="railnav__label" data-i18n="nav5">What's Next</span></button>
+    <button class="railnav__tour" id="rail-tour-btn"><span data-i18n="take_tour">Take the guided tour</span></button>
+  </nav>
+
+  <!-- ============ SCREENS (filled by render modules) ============ -->
+  <main id="app">
+    <section class="screen active" id="screen-overview"></section>
+    <section class="screen" id="screen-mix"></section>
+    <section class="screen" id="screen-drivers"></section>
+    <section class="screen" id="screen-capex"></section>
+    <section class="screen" id="screen-next"></section>
+  </main>
+</div>
+
+<div id="toast-root" aria-live="polite"></div>
+<div id="tour-root"></div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

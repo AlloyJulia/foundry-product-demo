@@ -1,0 +1,14 @@
+/* Foundry design tokens — generated from tokens.json (roles + fonts).
+   The single source of truth for the venture's brand: navy + ember. */
+:root{
+  --role-bg: #0f1b2d;
+  --role-surface: #1a2333;
+  --role-accent: #ff6b35;
+  --role-accent2: #ff9868;
+  --role-alert: #ef4444;
+  --role-title: #ffffff;
+  --role-body: #a9b4c8;
+  --role-line: #2a3548;
+  --role-display: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --role-mono: "Roboto Mono", ui-monospace, Menlo, monospace;
+}

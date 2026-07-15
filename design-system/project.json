@@ -1,0 +1,7 @@
+{
+  "venture": "Foundry",
+  "designProjectId": "00428949-6604-4788-b163-47b334e1f81c",
+  "designProjectName": "AG · Foundry Design System",
+  "provisioned": true,
+  "note": "Provisioned via /pitch-kickoff (DesignSync.create_project) 2026-07-10. Foundry brand: navy #0f1b2d / ember #ff6b35. The VB builds the pitch deck on this project in Claude Design from ../pitch/kickoff-prompt.md."
+}

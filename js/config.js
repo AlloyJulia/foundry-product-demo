@@ -1,0 +1,21 @@
+/* Foundry product-v2 — app config.
+   Brand string lives HERE only (Palantir-Foundry rename risk, memo §5) — never
+   hard-code "Foundry" across modules; import BRAND. */
+
+export const BRAND = "Foundry";
+
+// Mock signed-in session (no real auth — this is a demo workspace).
+export const SESSION = {
+  name: "Julia R.",
+  role: "Planning",
+  site: "Steelco",
+  initials: "JR",
+  lastLogin: "2 min ago"
+};
+
+export const SCREENS = ["overview", "mix", "drivers", "capex", "next"];
+
+// Filter option keys (labels resolved via i18n).
+export const REGIONS = ["occidente", "oriente", "central"];
+export const PRODUCTS = ["rebar", "wirerod", "profile", "mesh"];
+export const HORIZONS = [6, 9, 12];
