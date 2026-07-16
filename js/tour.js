@@ -102,8 +102,9 @@ function reposition() {
   } else if (r.top - th - gap >= 16) {       // above — only if it genuinely fits
     left = hClamp(r.left); top = r.top - th - gap;
   } else {                                    // tall element (no side/above/below room):
-    // pin to the viewport bottom so we never cover the top controls (e.g. the tabs).
-    left = hClamp(r.left); top = vh - th - 16;
+    // pin to the bottom-RIGHT corner — the least-important area — so the element's
+    // top-left title/tabs are always visible.
+    left = vw - tw - 16; top = vh - th - 16;
   }
   tip.style.left = left + "px";
   tip.style.top = top + "px";
