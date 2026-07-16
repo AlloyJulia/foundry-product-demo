@@ -323,7 +323,7 @@ export const I18N = {
 
     /* Spotlight tour — 7 beats (title / body / what this proves) */
     tb0_title: "Welcome — Foundry in a quick tour",
-    tb0_body: "Foundry turns the signals that move your market — including ones you never had — into two clear calls: what to produce now, and when to build next. Scenario planning runs through both. Here's the walkthrough.",
+    tb0_body: "Foundry turns the signals that move your market — including ones you never had — into two clear calls: what to produce now, and where to invest capex next. Scenario planning runs through both. Here's the walkthrough.",
     tb1_title: "New signals you never had — fed in automatically",
     tb1_body: "The unlock is data you couldn't get before — like a competitor bringing new capacity online. Foundry brings the external industry signals in for you, alongside your own internal numbers (weekly sales, production history), in one live feed — nothing to chase by hand. Every recommendation runs off it.",
     tb1_proves: "Proves the product has a coherent shape, not one screen — and the two calls never contradict.",
@@ -671,7 +671,7 @@ export const I18N = {
 
     /* Spotlight tour — 7 beats */
     tb0_title: "Bienvenido — Foundry en un recorrido rápido",
-    tb0_body: "Foundry convierte las señales que mueven tu mercado — incluidas las que nunca tuviste — en dos decisiones claras: qué producir ahora, y cuándo construir después. La planeación de escenarios recorre ambas. Aquí está el recorrido.",
+    tb0_body: "Foundry convierte las señales que mueven tu mercado — incluidas las que nunca tuviste — en dos decisiones claras: qué producir ahora, y dónde invertir capex después. La planeación de escenarios recorre ambas. Aquí está el recorrido.",
     tb1_title: "Señales nuevas que nunca tuviste — integradas automáticamente",
     tb1_body: "El gran desbloqueo son los datos que antes no podías obtener — como un competidor que pone nueva capacidad en marcha. Foundry integra por ti las señales externas de la industria, junto a tus propios números internos (ventas semanales, historial de producción), en un solo feed en vivo — sin perseguir nada a mano. Cada recomendación corre a partir de él.",
     tb1_proves: "Demuestra que el producto tiene forma coherente, no una sola pantalla — y las dos decisiones nunca se contradicen.",
