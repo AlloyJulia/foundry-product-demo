@@ -233,7 +233,7 @@ export const DATA_SOURCES = [
   { en: "World Steel Association", es: "World Steel Association", type_en: "Demand outlook", type_es: "Panorama de demanda", status: "sample", sync: "Jul 12" },
   { en: "National central bank", es: "Banco central nacional", type_en: "Macro & construction indicators", type_es: "Indicadores macro y de construcción", status: "sample", sync: "Jul 13" },
   { en: "Weekly sales & orders", es: "Ventas y pedidos semanales", type_en: "Internal · your own weekly numbers", type_es: "Interno · tus propios números semanales", status: "syncing", sync: "auto" },
-  { en: "Mill ERP", es: "ERP de la planta", type_en: "Internal · production & demand history", type_es: "Interno · producción e historial de demanda", status: "syncing", sync: "auto" }
+  { en: "SAP S/4HANA (ERP)", es: "SAP S/4HANA (ERP)", type_en: "Internal · production & demand history", type_es: "Interno · producción e historial de demanda", status: "syncing", sync: "auto" }
 ];
 
 /* ---- Screen 4: EVENT-DRIVEN scenario planning (ILLUSTRATIVE, client-side only) ---- */

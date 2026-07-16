@@ -48,6 +48,10 @@ export function renderNext() {
           '</tr></thead>' +
           '<tbody>' + rows + '</tbody>' +
         '</table></div>' +
+        // Subtle: the stack Foundry plugs into (grounded in producer interviews — SAP, Power BI).
+        '<div class="dm-integrations" style="margin-top:12px;font-size:0.78rem;opacity:.75">' +
+          '<span data-i18n="dm_integrations">Plugs into your stack</span> — SAP S/4HANA · Power BI · Excel / CSV · REST API' +
+        '</div>' +
       '</section>' +
 
       '<section class="dm-card" data-tour="next-contributors">' +

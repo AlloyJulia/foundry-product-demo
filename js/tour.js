@@ -83,12 +83,27 @@ function reposition() {
   hl.style.width = (r.width + pad * 2) + "px";
   hl.style.height = (r.height + pad * 2) + "px";
 
-  // place tooltip below if room, else above
+  // Place the tip to the SIDE so it doesn't cover the spotlighted content:
+  // right → left → below → above, always clamped into the viewport.
   const tip = nodes.tip;
-  const tipH = tip.offsetHeight || 200;
-  const below = r.bottom + tipH + 20 < window.innerHeight;
-  tip.style.left = Math.max(16, Math.min(window.innerWidth - tip.offsetWidth - 16, r.left)) + "px";
-  tip.style.top = (below ? r.bottom + pad + 12 : Math.max(16, r.top - tipH - 12)) + "px";
+  const tw = tip.offsetWidth || 360;
+  const th = tip.offsetHeight || 220;
+  const gap = 14;
+  const vw = window.innerWidth, vh = window.innerHeight;
+  const vClamp = function (top) { return Math.max(16, Math.min(vh - th - 16, top)); };
+  const hClamp = function (left) { return Math.max(16, Math.min(vw - tw - 16, left)); };
+  let left, top;
+  if (vw - r.right >= tw + gap) {            // to the right of the spotlight
+    left = r.right + gap; top = vClamp(r.top);
+  } else if (r.left >= tw + gap) {           // to the left
+    left = r.left - gap - tw; top = vClamp(r.top);
+  } else if (r.bottom + th + gap < vh) {     // below
+    left = hClamp(r.left); top = r.bottom + gap;
+  } else {                                    // above
+    left = hClamp(r.left); top = Math.max(16, r.top - th - gap);
+  }
+  tip.style.left = left + "px";
+  tip.style.top = top + "px";
 }
 
 function updateTooltip(beat) {
@@ -100,6 +115,7 @@ function updateTooltip(beat) {
     return '<span class="tour-dot' + (i === idx ? " is-on" : "") + '"></span>';
   }).join("");
   nodes.back.style.visibility = idx > 0 ? "visible" : "hidden";
+  nodes.back.textContent = getState().lang === "es" ? "← Atrás" : "← Back";
   nodes.next.textContent = idx === BEATS.length - 1
     ? (getState().lang === "es" ? "Terminar" : "Finish")
     : (getState().lang === "es" ? "Siguiente" : "Next");
