@@ -50,7 +50,7 @@ export function renderNext() {
         '</table></div>' +
       '</section>' +
 
-      '<section class="dm-card">' +
+      '<section class="dm-card" data-tour="next-contributors">' +
         '<div class="eyebrow" data-i18n="s4_comm_eyebrow">' + t("s4_comm_eyebrow") + '</div>' +
         '<div class="dm-card__title" data-i18n="s4_comm_title">' + t("s4_comm_title") + '</div>' +
         '<p class="dm-p" data-i18n="s4_comm_sub">' + t("s4_comm_sub") + '</p>' +

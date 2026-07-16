@@ -5,7 +5,7 @@ import { getState } from "../state.js";
 import { recFor, scenariosFor, breakevenFor } from "../compute.js";
 import { scenarioFan, scenarioLegend, probBars, breakevenBars } from "../charts.js";
 
-const EVENT_KEYS = ["baseline", "compExit", "compEnter", "policy"];
+const EVENT_KEYS = ["baseline", "boom", "compEnter", "climate", "remit"];
 
 export function renderCapex() {
   const el = document.getElementById("screen-capex");

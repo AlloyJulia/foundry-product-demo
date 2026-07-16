@@ -228,6 +228,39 @@ h1{ font-size: clamp(24px, 3vw, 35px); line-height: 1.18; }
 .mix-bar--rec .mix-bar__fill{ background: var(--accent); }
 .mix-bar__val{ position: absolute; right: 7px; top: 50%; transform: translateY(-50%); font-family: var(--mono); font-size: 10.5px; }
 .mix-row__delta{ font-family: var(--mono); font-size: 13px; font-weight: 700; text-align: right; color: var(--body); }
+
+/* Screen 2 — the RESULTS block gets an ember accent edge (it's the output) */
+.mix-block--results{ border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); box-shadow: var(--shadow-md); }
+.mix-block .eyebrow{ margin-bottom: 6px; }
+
+/* Screen 2 — demand by distribution channel */
+.ch-rows{ display: flex; flex-direction: column; gap: 12px; }
+.ch-row{ display: grid; grid-template-columns: 270px 1fr 72px; align-items: center; gap: 14px; }
+.ch-row__label{ font-size: 13.5px; font-weight: 600; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.ch-track{ position: relative; height: 16px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
+.ch-fill{ position: absolute; left: 0; top: 0; height: 100%; border-radius: 4px; background: color-mix(in srgb, var(--accent) 55%, var(--surface-2)); transition: width .4s var(--ease); }
+.ch-row__share{ font-family: var(--mono); font-size: 13px; font-weight: 700; text-align: right; display: flex; align-items: center; justify-content: flex-end; gap: 6px; }
+.ch-dir{ font-size: 10px; }
+.ch-dir--up{ color: var(--accent2); }
+.ch-dir--down, .ch-dir--flat{ color: var(--body); }
+
+/* Screen 2 — production plan matched to the real lines */
+.lp-head{ margin: 20px 0 13px; padding-top: 17px; border-top: 1px solid var(--line); }
+.lp-head__title{ font-weight: 700; font-size: 14.5px; }
+.lp-rows{ display: flex; flex-direction: column; gap: 12px; }
+.lp-row{ display: grid; grid-template-columns: 240px 1fr 150px; align-items: center; gap: 14px; }
+.lp-row__line{ font-size: 13.5px; font-weight: 600; }
+.lp-makes{ display: flex; gap: 5px; margin-top: 5px; flex-wrap: wrap; }
+.lp-track{ position: relative; height: 20px; background: var(--surface-2); border-radius: 4px; overflow: hidden; }
+.lp-fill{ position: absolute; left: 0; top: 0; height: 100%; border-radius: 4px; transition: width .4s var(--ease); }
+.lp-fill--fit{ background: color-mix(in srgb, #3fae6b 62%, var(--surface-2)); }
+.lp-fill--tight{ background: color-mix(in srgb, var(--accent) 55%, var(--surface-2)); }
+.lp-fill--over{ background: color-mix(in srgb, var(--role-alert, #ef4444) 70%, var(--surface-2)); }
+.lp-load{ position: absolute; right: 7px; top: 50%; transform: translateY(-50%); font-family: var(--mono); font-size: 10.5px; color: var(--title); }
+.lp-verdict{ font-family: var(--mono); font-size: 12px; font-weight: 700; text-align: right; }
+.lp-verdict--fit{ color: #3fae6b; }
+.lp-verdict--tight{ color: var(--accent2); }
+.lp-verdict--over{ color: var(--role-alert, #ef4444); }
 .mix-delta--up{ color: var(--accent); }
 .mix-coldstart{ display: flex; align-items: flex-start; gap: 11px; font-size: 13px; color: var(--body); line-height: 1.5; }
 .mix-coldstart--full{ padding: 4px 0; }
@@ -516,6 +549,10 @@ h1{ font-size: clamp(24px, 3vw, 35px); line-height: 1.18; }
   .brand-tag, .user-chip__meta{ display: none; }
   main#app{ padding: 24px 14px 80px; }
   .mix-row{ grid-template-columns: 120px 1fr 54px; gap: 10px; }
+  .ch-row{ grid-template-columns: 1fr 64px; gap: 8px; }
+  .ch-track{ grid-column: 1 / -1; order: 3; }
+  .lp-row{ grid-template-columns: 1fr 108px; gap: 8px; }
+  .lp-track{ grid-column: 1 / -1; order: 3; }
   .rec-card{ flex-direction: column; }
   .be-row{ grid-template-columns: 1fr; gap: 7px; }
   .filters{ gap: 14px; }

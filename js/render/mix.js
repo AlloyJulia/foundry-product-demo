@@ -3,8 +3,8 @@
 import { t } from "../i18n.js";
 import { getState } from "../state.js";
 import { REGIONS, PRODUCTS, HORIZONS } from "../config.js";
-import { forecastFor, divergence, mixFor, isHold } from "../compute.js";
-import { forecastChart, forecastLegend, mixBars } from "../charts.js";
+import { forecastFor, divergence, mixFor, isHold, channelsFor, linePlanFor } from "../compute.js";
+import { forecastChart, forecastLegend, mixBars, channelRows, linePlanRows } from "../charts.js";
 
 export function renderMix() {
   const el = document.getElementById("screen-mix");
@@ -68,6 +68,8 @@ function signalBlock(fc, div) {
         '<div><span>' + alertText(div) + '</span></div>' +
       '</div>';
 
+  const f = getState().filters;
+
   return alert +
     '<div class="chart-card" id="forecast-card" data-tour="mix-signal">' +
       '<div class="chart-card__title"><span data-i18n="s2_chart_title">' + t("s2_chart_title") + '</span>' +
@@ -75,8 +77,21 @@ function signalBlock(fc, div) {
       '<div id="forecast-mount">' + forecastChart(fc.series, getState().lang) + '</div>' +
       '<div class="chart-legend">' + forecastLegend() + '</div>' +
     '</div>' +
-    '<div class="mix-block">' +
+
+    // Demand is not one number — it splits into channels, each modeled separately.
+    '<div class="mix-block" data-tour="mix-channels">' +
       '<div class="mix-block__head">' +
+        '<div class="eyebrow" data-i18n="s2_ch_eyebrow">' + t("s2_ch_eyebrow") + '</div>' +
+        '<div class="mix-block__title" data-i18n="s2_ch_title">' + t("s2_ch_title") + '</div>' +
+        '<div class="mix-block__sub" data-i18n="s2_ch_sub">' + t("s2_ch_sub") + '</div>' +
+      '</div>' +
+      '<div class="ch-rows">' + channelRows(channelsFor(f)) + '</div>' +
+    '</div>' +
+
+    // THE OUTPUT (per Bill/Allegion): recommended mix → matched to the real lines.
+    '<div class="mix-block mix-block--results" data-tour="mix-lineplan">' +
+      '<div class="mix-block__head">' +
+        '<div class="eyebrow" data-i18n="s2_results_eyebrow">' + t("s2_results_eyebrow") + '</div>' +
         '<div class="mix-block__title" data-i18n="s2_mix_title">' + t("s2_mix_title") + '</div>' +
         '<div class="mix-block__sub" data-i18n="s2_mix_sub">' + t("s2_mix_sub") + '</div>' +
       '</div>' +
@@ -84,8 +99,32 @@ function signalBlock(fc, div) {
         '<span class="mix-legend__item"><span class="mix-swatch mix-swatch--plan"></span><span data-i18n="s2_mix_plan">' + t("s2_mix_plan") + '</span></span>' +
         '<span class="mix-legend__item"><span class="mix-swatch mix-swatch--rec"></span><span data-i18n="s2_mix_rec">' + t("s2_mix_rec") + '</span></span>' +
       '</div>' +
-      '<div class="mix-rows">' + mixBars(mixFor(getState().filters)) + '</div>' +
+      '<div class="mix-rows">' + mixBars(mixFor(f)) + '</div>' +
+
+      // The next step Bill asked for: turn the mix into a line-by-line plan.
+      '<div class="lp-head">' +
+        '<div class="lp-head__title" data-i18n="s2_lp_title">' + t("s2_lp_title") + '</div>' +
+        '<div class="mix-block__sub" data-i18n="s2_lp_sub">' + t("s2_lp_sub") + '</div>' +
+      '</div>' +
+      '<div class="lp-rows">' + linePlanRows(linePlanFor(f)) + '</div>' +
+      linePlanCallout(f) +
     '</div>';
+}
+
+// A calm "it all fits" banner, or an alert when a line is over capacity — the point
+// where a production question becomes a capex question.
+function linePlanCallout(f) {
+  const plan = linePlanFor(f);
+  const over = plan.filter(function (l) { return l.verdict === "over"; });
+  if (!over.length) {
+    return '<div class="alert-banner alert-banner--calm">' +
+      '<span class="alert-banner__icon">✓</span><div><span data-i18n="s2_lp_ok">' + t("s2_lp_ok") + '</span></div></div>';
+  }
+  const lineName = t("lp_" + over[0].key);
+  const txt = getState().lang === "es"
+    ? "<b>" + lineName + "</b> queda por encima de su capacidad con el volumen recomendado. Mantén inventario, desplaza carga a otra línea — o este es el disparador de la decisión de capex (construir / esperar / asociarse)."
+    : "<b>" + lineName + "</b> runs over capacity on the recommended volume. Hold inventory, shift load to another line — or this is the trigger for the capex build / wait / partner call.";
+  return '<div class="alert-banner"><span class="alert-banner__icon">▲</span><div><span>' + txt + '</span></div></div>';
 }
 
 function holdBlock() {

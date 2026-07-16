@@ -3,7 +3,7 @@
    Unit-checkable in tests.html. All outputs are illustrative sample data. */
 
 import {
-  FORECAST_BY_REGION, PRODUCT_FACTOR, MIX_BY_REGION,
+  FORECAST_BY_REGION, PRODUCT_FACTOR, MIX_BY_REGION, CHANNELS_BY_REGION, LINES_BY_REGION,
   SCENARIO_BASE, BREAKEVEN_BASE, EVENTS, CATEGORIES
 } from "./data.js";
 
@@ -62,6 +62,22 @@ export function divergence(filters) {
 export function mixFor(filters) {
   return (MIX_BY_REGION[filters.region] || MIX_BY_REGION.occidente).map(function (m) {
     return { key: m.key, plan: m.plan, rec: m.rec, delta: m.rec - m.plan };
+  });
+}
+
+/* Demand split by distribution channel for a region (each channel = its own model). */
+export function channelsFor(filters) {
+  return CHANNELS_BY_REGION[filters.region] || CHANNELS_BY_REGION.occidente;
+}
+
+/* Recommended production plan matched to the real lines: load vs. capacity + verdict.
+   verdict: over (load > capacity) | tight (>=90% util) | fit. */
+export function linePlanFor(filters) {
+  const lines = LINES_BY_REGION[filters.region] || LINES_BY_REGION.occidente;
+  return lines.map(function (l) {
+    const util = Math.round((l.load / l.cap) * 100);
+    const verdict = util > 100 ? "over" : (util >= 90 ? "tight" : "fit");
+    return { key: l.key, makes: l.makes, cap: l.cap, load: l.load, util: util, verdict: verdict };
   });
 }
 

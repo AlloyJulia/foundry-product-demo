@@ -79,6 +79,57 @@ export const MIX_BY_REGION = {
   ]
 };
 
+/* ---- Screen 2: distribution channels — a separate demand model per channel ----
+   Bill Ossen (Allegion, VP-level, interview 2026-07-15): wholesale and retail are
+   different demand problems — "so if you can separate that, that is really valuable"
+   — and each may need its own predictive model. Grupo AG steel sells through three
+   channels; Foundry forecasts each with its own model, then rolls them up.
+   share = % of the region's demand; dir = trend; modelKey = the model each uses. */
+export const CHANNELS_BY_REGION = {
+  occidente: [
+    { key: "construction", share: 52, dir: "up",   modelKey: "chmodel_construction" },
+    { key: "distributor",  share: 33, dir: "up",   modelKey: "chmodel_distributor" },
+    { key: "retail",       share: 15, dir: "flat", modelKey: "chmodel_retail" }
+  ],
+  central: [
+    { key: "construction", share: 44, dir: "flat", modelKey: "chmodel_construction" },
+    { key: "distributor",  share: 39, dir: "up",   modelKey: "chmodel_distributor" },
+    { key: "retail",       share: 17, dir: "flat", modelKey: "chmodel_retail" }
+  ],
+  oriente: [
+    { key: "construction", share: 41, dir: "flat", modelKey: "chmodel_construction" },
+    { key: "distributor",  share: 40, dir: "flat", modelKey: "chmodel_distributor" },
+    { key: "retail",       share: 19, dir: "flat", modelKey: "chmodel_retail" }
+  ]
+};
+
+/* ---- Screen 2: the OUTPUT — recommended production plan matched to the real lines ----
+   Bill (Allegion, 2026-07-15) on the single most-needed next step: "do you take the
+   output of this and say, okay, break this down into a production plan… what should I
+   actually plan for?… It needs to match the actual lines available." So Foundry turns
+   the recommended mix into a line-by-line load and flags where recommended demand
+   exceeds available capacity (the trigger for the capex build/wait call).
+   cap = line capacity (kt/mo); load = recommended load to meet the forecast mix;
+   makes = the products each line can physically roll. */
+export const LINES_BY_REGION = {
+  occidente: [
+    { key: "roll1", makes: ["rebar", "profile"], cap: 30, load: 31 },
+    { key: "roll2", makes: ["rebar", "wirerod"], cap: 24, load: 22 },
+    { key: "wire",  makes: ["wirerod", "mesh"],  cap: 12, load: 9 },
+    { key: "mesh",  makes: ["mesh"],             cap: 7,  load: 5 }
+  ],
+  central: [
+    { key: "roll1", makes: ["rebar", "profile"], cap: 26, load: 22 },
+    { key: "roll2", makes: ["rebar", "wirerod"], cap: 20, load: 17 },
+    { key: "wire",  makes: ["wirerod", "mesh"],  cap: 11, load: 8 },
+    { key: "mesh",  makes: ["mesh"],             cap: 6,  load: 4 }
+  ],
+  oriente: [
+    { key: "roll1", makes: ["rebar", "profile"], cap: 14, load: 9 },
+    { key: "wire",  makes: ["wirerod", "mesh"],  cap: 6,  load: 4 }
+  ]
+};
+
 /* ---- Screen 3: three aggregated signal CATEGORIES ----
    dir + weight are data; category meta text lives in i18n (cat_*). Indicator chips
    are inline-bilingual; lead:true marks the non-obvious LEADING indicators (the edge). */
@@ -191,16 +242,20 @@ export const EVENTS = {
     verdict: "wait", conf: "moderate",
     headKey: "s4_rec_headline", subKey: "s4_rec_sub", readKey: "ev_baseline_read",
     beLabelKey: "be_why_wait", beTextKey: "s4_be_readout" },
-  compExit: { shift: 10, rec: { wait: 30, build: 55, partner: 15 }, be: 14,
+  boom: { shift: 12, rec: { wait: 22, build: 63, partner: 15 }, be: 15,
     verdict: "build", conf: "moderate",
-    headKey: "ev_compExit_head", subKey: "ev_compExit_sub", readKey: "ev_compExit_read",
-    beLabelKey: "be_why_build", beTextKey: "ev_compExit_be" },
+    headKey: "ev_boom_head", subKey: "ev_boom_sub", readKey: "ev_boom_read",
+    beLabelKey: "be_why_build", beTextKey: "ev_boom_be" },
   compEnter: { shift: -7, rec: { wait: 34, build: 11, partner: 55 }, be: -12,
     verdict: "partner", conf: "moderate",
     headKey: "ev_compEnter_head", subKey: "ev_compEnter_sub", readKey: "ev_compEnter_read",
     beLabelKey: "be_why_partner", beTextKey: "ev_compEnter_be" },
-  policy: { shift: -4, rec: { wait: 60, build: 14, partner: 26 }, be: -8,
+  climate: { shift: -4, rec: { wait: 60, build: 14, partner: 26 }, be: -8,
     verdict: "wait", conf: "low",
-    headKey: "ev_policy_head", subKey: "ev_policy_sub", readKey: "ev_policy_read",
-    beLabelKey: "be_why_wait", beTextKey: "ev_policy_be" }
+    headKey: "ev_climate_head", subKey: "ev_climate_sub", readKey: "ev_climate_read",
+    beLabelKey: "be_why_wait", beTextKey: "ev_climate_be" },
+  remit: { shift: -6, rec: { wait: 62, build: 13, partner: 25 }, be: -10,
+    verdict: "wait", conf: "low",
+    headKey: "ev_remit_head", subKey: "ev_remit_sub", readKey: "ev_remit_read",
+    beLabelKey: "be_why_wait", beTextKey: "ev_remit_be" }
 };

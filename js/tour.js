@@ -11,16 +11,20 @@ import { t } from "./i18n.js";
    is the finale. Beat 0 is a centered intro card with no spotlight (target: null).
    `key` drives the i18n copy; `n` is just the display number. */
 const BEATS = [
-  { n: 1, key: "tb0", target: null, tag: "intro — demand forecasting",
+  { n: 1, key: "tb0", target: null, tag: "intro — welcome",
     apply: function () { setState({ screen: "next" }); } },
   { n: 2, key: "tb1", target: "next-data", tag: "data in — one place",
     apply: function () { setState({ screen: "next" }); } },
-  { n: 3, key: "tb2", target: "mix-signal", tag: "production planning",
+  { n: 3, key: "tb_shared", target: "next-contributors", tag: "shared visibility — one place, live",
+    apply: function () { setState({ screen: "next" }); } },
+  { n: 4, key: "tb2", target: "mix-signal", tag: "production forecast — what you're looking at",
     apply: function () { setState({ screen: "mix", filters: { region: "occidente", product: "rebar", horizon: 9 } }); } },
-  { n: 4, key: "tb3", target: "capex-rec", tag: "capex planning — BUILD",
-    apply: function () { setState({ screen: "capex", capex: { event: "compExit" } }); } },
-  { n: 5, key: "tb4", target: "capex-scenarios", tag: "scenario planning — graph moves",
-    apply: function () { setState({ screen: "capex", capex: { event: "compEnter" } }); } }
+  { n: 5, key: "tb_items", target: "mix-lineplan", tag: "every item — demand per product line",
+    apply: function () { setState({ screen: "mix", filters: { region: "occidente", product: "rebar", horizon: 9 } }); } },
+  { n: 6, key: "tb4", target: "capex-whatif", tag: "scenario planning — the heart, feeds both",
+    apply: function () { setState({ screen: "capex", capex: { event: "boom" } }); } },
+  { n: 7, key: "tb3", target: "capex-rec", tag: "capex decision — one output of the scenario",
+    apply: function () { setState({ screen: "capex", capex: { event: "boom" } }); } }
 ];
 
 let idx = -1;

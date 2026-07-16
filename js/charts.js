@@ -186,6 +186,35 @@ export function mixBars(rows) {
   }).join("");
 }
 
+/* ---- Screen 2: demand by distribution channel — one row per channel, each tagged
+   with the distinct model it is forecast with (wholesale ≠ retail ≠ projects). ---- */
+export function channelRows(rows) {
+  const arrow = { up: "▲", down: "▼", flat: "→" };
+  return rows.map(function (c) {
+    return '<div class="ch-row">' +
+      '<div class="ch-row__label">' + t("ch_" + c.key) +
+        '<span class="cat-chip"><span class="cat-chip__lead">MODEL</span>' + t(c.modelKey) + '</span></div>' +
+      '<div class="ch-track"><span class="ch-fill" style="width:' + c.share + '%"></span></div>' +
+      '<div class="ch-row__share"><span class="ch-dir ch-dir--' + c.dir + '">' + arrow[c.dir] + '</span>' + c.share + '%</div>' +
+      '</div>';
+  }).join("");
+}
+
+/* ---- Screen 2: production plan matched to the real rolling lines (load vs capacity) ---- */
+export function linePlanRows(rows) {
+  return rows.map(function (l) {
+    const makes = l.makes.map(function (m) { return '<span class="cat-chip">' + t("mix_" + m) + '</span>'; }).join("");
+    return '<div class="lp-row">' +
+      '<div class="lp-row__line">' + t("lp_" + l.key) + '<div class="lp-makes">' + makes + '</div></div>' +
+      '<div class="lp-track">' +
+        '<span class="lp-fill lp-fill--' + l.verdict + '" style="width:' + Math.min(100, l.util) + '%"></span>' +
+        '<span class="lp-load">' + l.load + ' / ' + l.cap + ' kt</span>' +
+      '</div>' +
+      '<div class="lp-verdict lp-verdict--' + l.verdict + '">' + l.util + '% · ' + t("lp_" + l.verdict) + '</div>' +
+      '</div>';
+  }).join("");
+}
+
 export function probBars(rec, verdict) {
   const rows = [
     { key: "wait", val: rec.wait, cls: "rec-bar--wait" },
