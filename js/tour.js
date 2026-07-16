@@ -1,7 +1,7 @@
 /* Foundry product-v2 — spotlight coachmark tour.
-   4 beats in narrative order (data in → production → capex/BUILD → scenario planning):
-   each navigates + performs a live UI action (so the value prop is shown, not told),
-   spotlights a data-tour target. Auto-starts first visit; restartable; Esc/Skip exits. */
+   7 beats in narrative order (intro → data in → shared visibility → production forecast →
+   every item → capex decision → scenario planning): each navigates + performs a live UI
+   action, spotlights a data-tour target. Auto-starts first visit; restartable; Esc/Skip exits. */
 
 import { getState, setState, markTourDone } from "./state.js";
 import { t } from "./i18n.js";
@@ -17,14 +17,14 @@ const BEATS = [
     apply: function () { setState({ screen: "next" }); } },
   { n: 3, key: "tb_shared", target: "next-contributors", tag: "shared visibility — one place, live",
     apply: function () { setState({ screen: "next" }); } },
-  { n: 4, key: "tb2", target: "mix-signal", tag: "production forecast — what you're looking at",
+  { n: 4, key: "tb2", target: "mix-forecast", tag: "production forecast — filters + chart together",
     apply: function () { setState({ screen: "mix", filters: { region: "occidente", product: "rebar", horizon: 9 } }); } },
   { n: 5, key: "tb_items", target: "mix-lineplan", tag: "every item — demand per product line",
     apply: function () { setState({ screen: "mix", filters: { region: "occidente", product: "rebar", horizon: 9 } }); } },
-  { n: 6, key: "tb4", target: "capex-whatif", tag: "scenario planning — the heart, feeds both",
+  { n: 6, key: "tb3", target: "capex-rec", tag: "capex decision — the big bet (BUILD)",
     apply: function () { setState({ screen: "capex", capex: { event: "boom" } }); } },
-  { n: 7, key: "tb3", target: "capex-rec", tag: "capex decision — one output of the scenario",
-    apply: function () { setState({ screen: "capex", capex: { event: "boom" } }); } }
+  { n: 7, key: "tb4", target: "capex-whatif", tag: "scenario planning — the engine behind both (flips the call)",
+    apply: function () { setState({ screen: "capex", capex: { event: "compEnter" } }); } }
 ];
 
 let idx = -1;

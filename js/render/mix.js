@@ -25,17 +25,20 @@ export function renderMix() {
         '<span class="updated-chip" data-i18n="updated_ago">' + t("updated_ago") + '</span>' +
       '</div>' +
 
-      '<div class="filters" data-tour="mix-region">' +
-        filterGroup("region", "flt_region", REGIONS, f.region, "region_") +
-        filterGroup("product", "flt_product", PRODUCTS, f.product, "product_") +
-        filterGroup("horizon", "flt_horizon", HORIZONS, f.horizon, "horizon_") +
+      // Spotlight target: filters + forecast together, so the region/product tabs
+      // (North · rebar) are visible when the tour highlights the forecast.
+      '<div class="mix-forecast-group" data-tour="mix-forecast">' +
+        '<div class="filters">' +
+          filterGroup("region", "flt_region", REGIONS, f.region, "region_") +
+          filterGroup("product", "flt_product", PRODUCTS, f.product, "product_") +
+          filterGroup("horizon", "flt_horizon", HORIZONS, f.horizon, "horizon_") +
+        '</div>' +
+        (fc.empty
+          ? '<div class="empty-state" data-i18n="mix_empty">' + t("mix_empty") + '</div>'
+          : (hold ? holdBlock() : signalTop(fc, div))) +
       '</div>' +
 
-      (fc.empty
-        ? '<div class="empty-state" data-i18n="mix_empty">' + t("mix_empty") + '</div>'
-        : (hold
-            ? holdBlock()
-            : signalBlock(fc, div))) +
+      ((fc.empty || hold) ? '' : signalRest(f)) +
 
       '<div class="screen-nav">' +
         '<button class="btn-ghost" data-goto="next">← <span data-i18n="back">' + t("back") + '</span></button>' +
@@ -56,7 +59,9 @@ function filterGroup(name, labelKey, opts, current, prefix) {
     '</div>';
 }
 
-function signalBlock(fc, div) {
+// Top of the forecast group: the divergence alert + the forecast chart.
+function signalTop(fc, div) {
+  const f = getState().filters;
   const alert = div.material
     ? '<div class="alert-banner" data-tour="mix-alert">' +
         '<span class="alert-banner__icon">▲</span>' +
@@ -68,16 +73,21 @@ function signalBlock(fc, div) {
         '<div><span>' + alertText(div) + '</span></div>' +
       '</div>';
 
-  const f = getState().filters;
+  // Title names the current region · product so the chart is self-orienting.
+  const chartTitle = t("region_" + f.region) + " · " + t("product_" + f.product) + " — " + t("s2_chart_title");
 
   return alert +
     '<div class="chart-card" id="forecast-card" data-tour="mix-signal">' +
-      '<div class="chart-card__title"><span data-i18n="s2_chart_title">' + t("s2_chart_title") + '</span>' +
+      '<div class="chart-card__title"><span>' + chartTitle + '</span>' +
         '<span class="chart-card__unit" data-i18n="s2_chart_unit">' + t("s2_chart_unit") + '</span></div>' +
       '<div id="forecast-mount">' + forecastChart(fc.series, getState().lang) + '</div>' +
       '<div class="chart-legend">' + forecastLegend() + '</div>' +
-    '</div>' +
+    '</div>';
+}
 
+// The rest of the production view: demand-by-channel + the recommended mix matched to lines.
+function signalRest(f) {
+  return '' +
     // Demand is not one number — it splits into channels, each modeled separately.
     '<div class="mix-block" data-tour="mix-channels">' +
       '<div class="mix-block__head">' +
@@ -122,8 +132,8 @@ function linePlanCallout(f) {
   }
   const lineName = t("lp_" + over[0].key);
   const txt = getState().lang === "es"
-    ? "<b>" + lineName + "</b> queda por encima de su capacidad con el volumen recomendado. Mantén inventario, desplaza carga a otra línea — o este es el disparador de la decisión de capex (construir / esperar / asociarse)."
-    : "<b>" + lineName + "</b> runs over capacity on the recommended volume. Hold inventory, shift load to another line — or this is the trigger for the capex build / wait / partner call.";
+    ? "<b>" + lineName + "</b> no alcanza para el volumen recomendado. Puedes mantener inventario o mover carga a otra línea — pero si la demanda se sostiene así de alta, remezclar no basta y necesitas más capacidad. Ahí una pregunta de producción se vuelve una decisión de capex: construir / esperar / asociarse."
+    : "<b>" + lineName + "</b> can't fit the recommended volume. You can hold inventory or shift load to another line — but if demand stays this high, re-mixing isn't enough and you need more capacity. That's where a production question turns into a capex decision: build / wait / partner.";
   return '<div class="alert-banner"><span class="alert-banner__icon">▲</span><div><span>' + txt + '</span></div></div>';
 }
 
