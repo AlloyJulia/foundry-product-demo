@@ -120,7 +120,32 @@ function signalRest(f) {
       '</div>' +
       '<div class="lp-rows">' + linePlanRows(linePlanFor(f)) + '</div>' +
       linePlanCallout(f) +
+    '</div>' +
+    tradeoffBlock(f);
+}
+
+// Constrained scenario planning (per Meghan/Solventum, 2026-07-16): when demand outruns
+// capacity you can't make everything — show the trade-off two ways (margin vs. service)
+// so a scenario feels real. Only appears when a line is over capacity. Illustrative.
+function tradeoffBlock(f) {
+  const over = linePlanFor(f).filter(function (l) { return l.verdict === "over"; });
+  if (!over.length) return '';
+  function opt(which) {
+    return '<div class="cost-card">' +
+      '<div class="cost-card__tag" data-i18n="s2_to_' + which + '_tag">' + t("s2_to_" + which + "_tag") + '</div>' +
+      '<div class="cost-card__label" style="font-weight:600;color:var(--title,inherit)" data-i18n="s2_to_' + which + '_move">' + t("s2_to_" + which + "_move") + '</div>' +
+      '<div class="cost-card__label" style="margin-top:4px" data-i18n="s2_to_' + which + '_cost">' + t("s2_to_" + which + "_cost") + '</div>' +
     '</div>';
+  }
+  return '<div class="mix-block" data-tour="mix-tradeoff">' +
+    '<div class="mix-block__head">' +
+      '<div class="eyebrow" data-i18n="s2_to_eyebrow">' + t("s2_to_eyebrow") + '</div>' +
+      '<div class="mix-block__title" data-i18n="s2_to_title">' + t("s2_to_title") + '</div>' +
+      '<div class="mix-block__sub" data-i18n="s2_to_sub">' + t("s2_to_sub") + '</div>' +
+    '</div>' +
+    '<div class="cost-cards">' + opt("a") + opt("b") + '</div>' +
+    '<div class="mix-block__sub" data-i18n="s2_to_foot">' + t("s2_to_foot") + '</div>' +
+  '</div>';
 }
 
 // A calm "it all fits" banner, or an alert when a line is over capacity — the point

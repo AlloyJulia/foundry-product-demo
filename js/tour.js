@@ -19,11 +19,13 @@ const BEATS = [
     apply: function () { setState({ screen: "next" }); } },
   { n: 4, key: "tb2", target: "mix-forecast", tag: "production forecast — filters + chart together",
     apply: function () { setState({ screen: "mix", filters: { region: "occidente", product: "rebar", horizon: 9 } }); } },
-  { n: 5, key: "tb_items", target: "mix-lineplan", tag: "every item — demand per product line",
+  { n: 5, key: "tb_items", target: "mix-lineplan", tag: "every item — demand matched to real lines (supply)",
     apply: function () { setState({ screen: "mix", filters: { region: "occidente", product: "rebar", horizon: 9 } }); } },
-  { n: 6, key: "tb3", target: "capex-rec", tag: "capex decision — the big bet (BUILD)",
+  { n: 6, key: "tb_tradeoff", target: "mix-tradeoff", tag: "constrained trade-off — you can't make everything",
+    apply: function () { setState({ screen: "mix", filters: { region: "occidente", product: "rebar", horizon: 9 } }); } },
+  { n: 7, key: "tb3", target: "capex-rec", tag: "capex decision — the big bet (BUILD)",
     apply: function () { setState({ screen: "capex", capex: { event: "boom" } }); } },
-  { n: 7, key: "tb4", target: "capex-whatif", tag: "scenario planning — the engine behind both (flips the call)",
+  { n: 8, key: "tb4", target: "capex-whatif", tag: "scenario planning — the engine behind both (flips the call)",
     apply: function () { setState({ screen: "capex", capex: { event: "compEnter" } }); } }
 ];
 
