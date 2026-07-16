@@ -14,6 +14,7 @@ export function forecastFor(filters) {
   if (!base) return { coldStart: false, empty: true, series: null };
 
   const f = PRODUCT_FACTOR[filters.product] || PRODUCT_FACTOR.rebar;
+  const chShare = channelShareFor(filters);   // 1 for "all", else that channel's slice
   const today = base.todayIndex;
   // Forecast points available beyond "today":
   const maxIdx = base.actual.length - 1;
@@ -25,9 +26,9 @@ export function forecastFor(filters) {
       const planV = base.plan[i];
       if (aroundPlan && planV !== null && v !== null) {
         // scale the divergence-from-plan by the product's div factor, level by level.
-        return round1(planV * f.level + (v - planV) * f.level * f.div);
+        return round1((planV * f.level + (v - planV) * f.level * f.div) * chShare);
       }
-      return round1(v * f.level);
+      return round1(v * f.level * chShare);
     });
   }
 
@@ -68,6 +69,15 @@ export function mixFor(filters) {
 /* Demand split by distribution channel for a region (each channel = its own model). */
 export function channelsFor(filters) {
   return CHANNELS_BY_REGION[filters.region] || CHANNELS_BY_REGION.occidente;
+}
+
+/* Channel as a slice dimension: fraction of the region's demand this channel represents.
+   "all" (or unset) = 1 (every channel). Used to flex the forecast to one channel. */
+export function channelShareFor(filters) {
+  if (!filters.channel || filters.channel === "all") return 1;
+  const chs = CHANNELS_BY_REGION[filters.region] || CHANNELS_BY_REGION.occidente;
+  const c = chs.find(function (x) { return x.key === filters.channel; });
+  return c ? c.share / 100 : 1;
 }
 
 /* Recommended production plan matched to the real lines: load vs. capacity + verdict.

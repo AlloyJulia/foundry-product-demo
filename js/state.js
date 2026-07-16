@@ -7,7 +7,7 @@ const TOUR_KEY = "foundry_v2_tour_done";
 const state = {
   lang: "en",
   screen: "next",
-  filters: { region: "occidente", product: "rebar", horizon: 9 },
+  filters: { region: "occidente", product: "rebar", horizon: 9, channel: "all" },
   drivers: { leadOn: true, expanded: null },
   capex: { event: "baseline" },
   notifs: [],

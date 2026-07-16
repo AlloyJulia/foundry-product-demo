@@ -2,9 +2,9 @@
    the forecast, band, divergence alert, and recommended mix. Cold-start + empty states. */
 import { t } from "../i18n.js";
 import { getState } from "../state.js";
-import { REGIONS, PRODUCTS, HORIZONS } from "../config.js";
-import { forecastFor, divergence, mixFor, isHold, channelsFor, linePlanFor } from "../compute.js";
-import { forecastChart, forecastLegend, mixBars, channelRows, linePlanRows } from "../charts.js";
+import { REGIONS, PRODUCTS, HORIZONS, CHANNELS } from "../config.js";
+import { forecastFor, divergence, mixFor, isHold, linePlanFor } from "../compute.js";
+import { forecastChart, forecastLegend, mixBars, linePlanRows } from "../charts.js";
 
 export function renderMix() {
   const el = document.getElementById("screen-mix");
@@ -31,6 +31,7 @@ export function renderMix() {
         '<div class="filters">' +
           filterGroup("region", "flt_region", REGIONS, f.region, "region_") +
           filterGroup("product", "flt_product", PRODUCTS, f.product, "product_") +
+          filterGroup("channel", "flt_channel", CHANNELS, f.channel || "all", "ch_") +
           filterGroup("horizon", "flt_horizon", HORIZONS, f.horizon, "horizon_") +
         '</div>' +
         (fc.empty
@@ -73,13 +74,23 @@ function signalTop(fc, div) {
         '<div><span>' + alertText(div) + '</span></div>' +
       '</div>';
 
-  // Title names the current region · product so the chart is self-orienting.
-  const chartTitle = t("region_" + f.region) + " · " + t("product_" + f.product) + " — " + t("s2_chart_title");
+  // Title names the current slice (region · product · channel) so the chart is self-orienting.
+  const hasCh = f.channel && f.channel !== "all";
+  const parts = [t("region_" + f.region), t("product_" + f.product)];
+  if (hasCh) parts.push(t("ch_" + f.channel));
+  const chartTitle = parts.join(" · ") + " — " + t("s2_chart_title");
+  // When sliced to one channel, note it's modeled on its own drivers (each channel is separate).
+  const chNote = hasCh
+    ? '<div class="chart-card__note" style="font-size:0.78rem;opacity:.7;margin-top:2px">' +
+        (getState().lang === "es" ? "Este canal se modela por separado, con sus propios factores" : "This channel is modeled separately, on its own drivers") +
+        ' · ' + t("chmodel_" + f.channel) + '</div>'
+    : '';
 
   return alert +
     '<div class="chart-card" id="forecast-card" data-tour="mix-signal">' +
       '<div class="chart-card__title"><span>' + chartTitle + '</span>' +
         '<span class="chart-card__unit" data-i18n="s2_chart_unit">' + t("s2_chart_unit") + '</span></div>' +
+      chNote +
       '<div id="forecast-mount">' + forecastChart(fc.series, getState().lang) + '</div>' +
       '<div class="chart-legend">' + forecastLegend() + '</div>' +
     '</div>';
@@ -88,17 +99,8 @@ function signalTop(fc, div) {
 // The rest of the production view: demand-by-channel + the recommended mix matched to lines.
 function signalRest(f) {
   return '' +
-    // Demand is not one number — it splits into channels, each modeled separately.
-    '<div class="mix-block" data-tour="mix-channels">' +
-      '<div class="mix-block__head">' +
-        '<div class="eyebrow" data-i18n="s2_ch_eyebrow">' + t("s2_ch_eyebrow") + '</div>' +
-        '<div class="mix-block__title" data-i18n="s2_ch_title">' + t("s2_ch_title") + '</div>' +
-        '<div class="mix-block__sub" data-i18n="s2_ch_sub">' + t("s2_ch_sub") + '</div>' +
-      '</div>' +
-      '<div class="ch-rows">' + channelRows(channelsFor(f)) + '</div>' +
-    '</div>' +
-
     // THE OUTPUT (per Bill/Allegion): recommended mix → matched to the real lines.
+    // (Channel is now a filter above, not a separate aggregate block.)
     '<div class="mix-block mix-block--results" data-tour="mix-lineplan">' +
       '<div class="mix-block__head">' +
         '<div class="eyebrow" data-i18n="s2_results_eyebrow">' + t("s2_results_eyebrow") + '</div>' +
