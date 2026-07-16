@@ -97,10 +97,13 @@ function reposition() {
     left = r.right + gap; top = vClamp(r.top);
   } else if (r.left >= tw + gap) {           // to the left
     left = r.left - gap - tw; top = vClamp(r.top);
-  } else if (r.bottom + th + gap < vh) {     // below
+  } else if (r.bottom + th + gap < vh) {     // below the element
     left = hClamp(r.left); top = r.bottom + gap;
-  } else {                                    // above
-    left = hClamp(r.left); top = Math.max(16, r.top - th - gap);
+  } else if (r.top - th - gap >= 16) {       // above — only if it genuinely fits
+    left = hClamp(r.left); top = r.top - th - gap;
+  } else {                                    // tall element (no side/above/below room):
+    // pin to the viewport bottom so we never cover the top controls (e.g. the tabs).
+    left = hClamp(r.left); top = vh - th - 16;
   }
   tip.style.left = left + "px";
   tip.style.top = top + "px";
