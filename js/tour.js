@@ -57,23 +57,35 @@ function showBeat() {
   // let layout + scroll settle, then spotlight
   setTimeout(function () {
     const el = beat.target && document.querySelector('[data-tour="' + beat.target + '"]');
-    if (el) el.scrollIntoView({ block: "center", behavior: "smooth" });
-    setTimeout(reposition, 220);
+    if (el) {
+      // Align the target's TOP near the viewport top (not center): a tall element
+      // centered pushes its title off-screen. scroll-margin clears the sticky nav so
+      // the title/tabs stay visible — then the tip is placed away from that top.
+      el.style.scrollMarginTop = "104px";
+      // Instant (not smooth): a coachmark should jump straight to the target. Smooth
+      // scrolls race the screenshot AND get silently dropped on same-screen steps.
+      el.scrollIntoView({ block: "start", behavior: "auto" });
+    }
+    reposition();
+    setTimeout(reposition, 120);   // safety pass once layout settles
   }, 40);
 }
 
 function reposition() {
   if (idx < 0 || !nodes) return;
   const beat = BEATS[idx];
-  const el = beat.target ? document.querySelector('[data-tour="' + beat.target + '"]') : null;
-  // Intro / no-target beat: hide the spotlight and center the card.
-  if (!el) {
+  // Intro beat (target === null): hide the spotlight and center the card.
+  if (!beat.target) {
     nodes.highlight.style.display = "none";
     const t0 = nodes.tip;
     t0.style.left = Math.max(16, (window.innerWidth - t0.offsetWidth) / 2) + "px";
     t0.style.top = Math.max(16, (window.innerHeight - t0.offsetHeight) / 2) + "px";
     return;
   }
+  // Target set but not yet rendered (e.g. navigating back mid-render): retry —
+  // do NOT fall through to the centered layout, which would drop the tip over the title.
+  const el = document.querySelector('[data-tour="' + beat.target + '"]');
+  if (!el) { setTimeout(reposition, 80); return; }
   nodes.highlight.style.display = "";
   const r = el.getBoundingClientRect();
   const pad = 8;
