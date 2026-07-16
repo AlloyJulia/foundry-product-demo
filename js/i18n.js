@@ -73,8 +73,8 @@ export const I18N = {
     dm_cta: "See production planning",
 
     /* ---- filters (new) ---- */
-    flt_region: "Region",
-    flt_product: "Product line",
+    flt_region: "Geography",
+    flt_product: "Product",
     flt_horizon: "Horizon",
     flt_channel: "Channel",
     region_occidente: "North",
@@ -422,8 +422,8 @@ export const I18N = {
     dm_cta: "Ver planeación de producción",
 
     /* ---- filters (new) ---- */
-    flt_region: "Región",
-    flt_product: "Línea de producto",
+    flt_region: "Geografía",
+    flt_product: "Producto",
     flt_horizon: "Horizonte",
     flt_channel: "Canal",
     region_occidente: "Norte",
